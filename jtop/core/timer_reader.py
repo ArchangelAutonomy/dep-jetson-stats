@@ -41,11 +41,11 @@ class TimerReader:
         logger.debug("jtop timer start at {interval}s".format(interval=interval))
         try:
             while stop_event.is_set():
-                start = time.time()
+                start = time.monotonic()
                 # Callback function
                 self._callback()
                 # Measure timer_callback sleep time
-                delta = time.time() - start
+                delta = time.monotonic() - start
                 # Start to sleep
                 if interval > delta:
                     time.sleep(interval - delta)
